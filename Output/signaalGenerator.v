@@ -1,8 +1,8 @@
 module signaalGenerator(
-    CLK,
-    Reset,
-    Invoer,
-    Uitvoer);
+    input CLK,
+    input Reset,
+    input Invoer,
+    output Uitvoer);
 	 
 	input CLK;
 	input Reset;

@@ -1,6 +1,6 @@
 module WaardeNaarPWM(
-    Invoer,
-    PWM);
+    input Invoer,
+    output PWM);
 	 
 	input [2:0] Invoer;
 	output reg [15:0] PWM;

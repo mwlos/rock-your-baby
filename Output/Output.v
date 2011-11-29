@@ -1,10 +1,10 @@
 module Output(
-	CLK,
-	Reset
-    Freq,
-	Amp,
-    fPWM,
-	aPWM);
+	input CLK,
+	input Reset,
+    input Freq,
+	input Amp,
+    output fPWM,
+	output aPWM);
 	 
 	input CLK;
 	input Reset;
