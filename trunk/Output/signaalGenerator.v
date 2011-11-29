@@ -7,7 +7,7 @@ module signaalGenerator(
 	input CLK;
 	input Reset;
 	input [15:0] Invoer;
-	output reg Uitvoer;
+	output Uitvoer;
 	reg [15:0] C;
 	
 	wire resetmore;
@@ -21,14 +21,6 @@ module signaalGenerator(
 			C = C + 1'b1;
 	end
 	
-	assign on  = (C == 0);
-	assign off = (C == Invoer);
-	
-	always @ (posedge CLK) begin
-		if(off)
-			Uitvoer = 0;
-		else if (on)
-			Uitvoer = 1;
-	end
+	assign Uitvoer = (C <= Invoer);
 	
 endmodule
