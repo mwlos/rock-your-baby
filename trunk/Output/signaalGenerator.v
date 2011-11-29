@@ -1,13 +1,9 @@
 module signaalGenerator(
     input CLK,
     input Reset,
-    input Invoer,
-    output Uitvoer)
+    input [15:0] Invoer,
+    output Uitvoer);
 	 
-	input CLK;
-	input Reset;
-	input [15:0] Invoer;
-	output Uitvoer;
 	reg [15:0] C;
 	
 	wire resetmore;
