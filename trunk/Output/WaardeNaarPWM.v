@@ -1,4 +1,4 @@
-module toestandKeuze(
+module WaardeNaarPWM(
     Invoer,
     PWM);
 	 
