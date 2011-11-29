@@ -4,7 +4,7 @@ module Output(
     input Freq,
 	input Amp,
     output fPWM,
-	output aPWM);
+	output aPWM)
 	 
 	input CLK;
 	input Reset;
