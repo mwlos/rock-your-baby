@@ -5,7 +5,7 @@ module pathFinder(
 	input Flow,
 	output Amin
 	output Fplus
-	output Fmin)
+	output Fmin );
 	
 	wire data;
 	reg wrong;

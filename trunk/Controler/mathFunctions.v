@@ -8,7 +8,7 @@ module FAG(
 	output reg [3:0] F,
 	output F0,
 	output AF0
-	)
+	);
 	
 	wire FclkDff;
 	wire Fmin;
