@@ -1,4 +1,4 @@
-module mathFunctions(
+module FAG(
 	input clk,
 	input reset,
 	input Alaag,

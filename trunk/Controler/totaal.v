@@ -15,8 +15,8 @@ module FPGAControler(
 	wire stressGezakt;
 	wire Fmin;
 	
-	gtlt          stress   ( clk, reset, huilVolume,   hartRitme, stressGezakt                        );
-	pathFinder    pathfind ( clk, reset, stressGezakt, Fmin,      Alaag,      Fhoog, Flaag            );
-	mathFunctions math     ( clk, reset, Alaag,Fhoog,  Flaag,     A,          F,     F0,    AF0, Fmin );
+	gtlt        stress   ( clk, reset, huilVolume,   hartRitme, stressGezakt                        );
+	pathFinder  pathfind ( clk, reset, stressGezakt, Fmin,      Alaag,      Fhoog, Flaag            );
+	FAG         fag     ( clk, reset, Alaag,Fhoog,  Flaag,     A,          F,     F0,    AF0, Fmin );
 	
 endmodule
