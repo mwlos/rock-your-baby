@@ -27,50 +27,54 @@ module modcode(input stress,input clr,input clk,input reset,output Fmin,output F
 	reg [21:0] counter;
 	reg [21:0] delay = 22'b1111111111111111111111;
 	wire delayclk;
-always @ (posedge clk or posedge clr)begin
 	
-	if(clr)begin
-	counter = 0;
-	end
-	else begin
-	counter = counter + 1;
-	end
-end
+	assign delayclk = dclk;
+	assign Fplus = Fplus1;
+	assign Fmin = Fmin1;
+	assign Amin = Amin1;
 
-always @ (posedge clk) begin
-	
-	if(delay == counter)begin
-	dclk = 1;
-	counter = 0;
+	always @ (posedge clk or posedge clr)begin
+		if(clr)begin
+		counter = 0;
+		end
+		else begin
+		counter = counter + 1;
+		end
 	end
-	else dclk = 0;
-end
-assign delayclk = dclk;
-always @(posedge delayclk)begin
-	if(stress == 1)
-	Fmin1 = 1;
-	else
-	Fmin1 = 0;
-end
-always @ (posedge delayclk) begin
-	if(stress == 0)begin
-	Fplus1 = 1;
-	gf = 1;
+
+	always @ (posedge clk) begin
+		
+		if(delay == counter)begin
+		dclk = 1;
+		counter = 0;
+		end
+		else dclk = 0;
 	end
-	else begin 
-	Fplus1 = 0;
-	gf = 0;
+
+	always @(posedge delayclk)begin
+		if(stress == 1)
+		Fmin1 = 1;
+		else
+		Fmin1 = 0;
 	end
-end
-always @ (posedge delayclk)begin
-	if(gf == 1)
-	
-	Amin1 = 1;
-	else 
-   Amin1 = 0;
-end
-assign Fplus = Fplus1;
-assign Fmin = Fmin1;
-assign Amin = Amin1;
+
+	always @ (posedge delayclk) begin
+		if(stress == 0)begin
+		Fplus1 = 1;
+		gf = 1;
+		end
+		else begin 
+		Fplus1 = 0;
+		gf = 0;
+		end
+	end
+
+	always @ (posedge delayclk)begin
+		if(gf == 1)
+		
+		Amin1 = 1;
+		else 
+	   Amin1 = 0;
+	end
 
 endmodule
