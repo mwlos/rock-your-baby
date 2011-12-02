@@ -24,18 +24,18 @@ module FAG(
 	assign AF0 = F0 & (A == 0);
 	
 	// DFF to remember F
-	always @ (posedge FclkDff or posedge reset) begin
+	always @ (posedge clk or posedge reset) begin	// hier stond eerst FclkDff ipv clk
 		if (reset)
 			F = 5;
-		else
+		else if (FclkDff)		// lost een warning op door gebruik te maken van de CE (clock enable) van de FF
 			F = Fcalc;
 	end
 	
 	// Counter for A
-	always @ (posedge reset or posedge Alaag) begin
+	always @ (posedge reset or posedge clk) begin	// hier stond eerst Alaag ipv clk
 		if (reset)
 			A = 5;
-		else
+		else if (Alaag)		// lost een warning op door gebruik te maken van de CE (clock enable) van de FF
 			A = A-1;
 	end
 	
