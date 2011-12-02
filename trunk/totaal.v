@@ -9,10 +9,12 @@ module totaal (
 	
 	wire hartslag;
 	wire huilVol;
+	wire amp;
+	wire freq;
 	
-	huilVolume    huil (clk, reset, hartslagIngang, hartslag );
-	hartRitme     hart (clk, reset, DSPingang,      huilVol );
-	FPGAControler crtl (clk, reset, ... );
-	Output        out  (clk, reset, ... );
+	huilVolume    huil (clk, reset, hartslagIngang, hartslag                );
+	hartRitme     hart (clk, reset, DSPingang,      huilVol                 );
+	FPGAControler crtl (clk, reset, huilVol,        hartslag, amp,    freq  );
+	Output        out  (clk, reset, freq,           amp,      PSfreq, PSamp );
 	
 endmodule
