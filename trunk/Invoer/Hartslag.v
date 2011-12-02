@@ -7,11 +7,19 @@ module hartRitme(
 	reg [7:0] Uitvoer;
 	reg [27:0] C;
 	reg [7:0] Freq;
+	reg in;
 	
 	wire k;
 	wire h;
 	assign h = (C==0);
 	assign k = (Reset || h);
+	
+	always @ (posedge CLK or posedge Reset) begin
+		if (Reset)
+			in = 0;
+		else
+			in = Ingang;
+	end
 
 	always @ (posedge CLK or posedge Reset) begin
 		if(Reset)
@@ -27,7 +35,7 @@ module hartRitme(
 			Uitvoer = 0;
 	end
 
-	always @ (posedge k or posedge Ingang) begin
+	always @ (posedge k or posedge in) begin
 		if(k)
 			Freq=0;
 		else 
