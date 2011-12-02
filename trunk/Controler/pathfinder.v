@@ -3,15 +3,15 @@ module pathFinder(
 	input reset,
 	input stress,
 	input Flow,
-	output Amin
-	output Fplus
+	output Amin,
+	output Fplus,
 	output Fmin );
 	
 	wire data;
 	reg wrong;
 	
 	assign data = ( Flow | wrong ) & ( (~Flow) | stress);
-	assign Fmin = (~reset) | ( lck | ( (~Flow) | stress ) );
+	assign Fmin = (~reset) | ( clk | ( (~Flow) | stress ) );
 	assign Fplus = (~reset) | data;
 	assign Amin = (~reset) | ( (~( (~Flow) | stress )) | ( Flow | wrong ) );
 	
