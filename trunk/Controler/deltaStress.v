@@ -26,9 +26,7 @@ module deltaStress(
 		output stressLaag
     );
 	 
-	 //wire [2:0] huil;
 	 reg [2:0] huilOud;
-	 //wire huilLaag;
 	 reg hartOut;
 	 reg huilOut;
 	 
@@ -36,8 +34,8 @@ module deltaStress(
 	 reg [2:0] hartOud;
 	 wire hartLaag;
 	 
-	 assign huil = huilVolume[7:5];
-	 assign hart = hartslag[7:5];
+	 assign huil = huilVolume[7:5];	// Geeft warning
+	 assign hart = hartslag[7:5];   // Geeft warning
 		
 	always @ (posedge clk or posedge r) begin
 		if (r) huilOud = 0;

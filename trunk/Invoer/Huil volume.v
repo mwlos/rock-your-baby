@@ -3,9 +3,8 @@ module huilVolume(
 	input reset,
 	input [7:0] DSPinvoer,
 	output DSPctrl,
-	output [7:0] huilVolume)
+	output reg [7:0] huilVolume);
 	
-	reg [7:0] huilVolume;
 	assign DSPctrl = clk;
 	
 	always @ (posedge clk or posedge reset) begin
