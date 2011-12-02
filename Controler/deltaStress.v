@@ -23,9 +23,7 @@ module deltaStress(
 		input r,
 		input[7:0] huilVolume,
 		input[7:0] hartslag,
-		output stressLaag,
-		output [2:0] huil,
-		output hartOut
+		output stressLaag
     );
 	 
 	 //wire [2:0] huil;
