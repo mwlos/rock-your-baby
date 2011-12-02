@@ -1,19 +1,20 @@
 module totaal (
 	input clk,
 	input reset,
-	input DSPingang
+	input DSPingang,
 	input hartslagIngang,
 	output DSPctrl,
 	output PSfreq,
-	output PSamp)
+	output PSamp);
 	
 	wire hartslag;
 	wire huilVol;
-	wire amp;
-	wire freq;
+	wire [2:0] amp;
+	wire [2:0] freq;
+
+	huilVolume	  huil (clk, reset, DSPingang,		DSPctrl,  huilVol       ); 
+	hartRitme	  hart (clk, reset, hartslagIngang,	hartslag                );
 	
-	huilVolume    huil (clk, reset, hartslagIngang, hartslag                );
-	hartRitme     hart (clk, reset, DSPingang,      huilVol                 );
 	FPGAControler crtl (clk, reset, huilVol,        hartslag, amp,    freq  );
 	Output        out  (clk, reset, freq,           amp,      PSfreq, PSamp );
 	

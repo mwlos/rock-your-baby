@@ -2,12 +2,11 @@ module hartRitme(
 	input CLK,
 	input Reset,
 	input Ingang,
-	output [7:0] Uitvoer);
+	output reg [7:0] Uitvoer);
 
-	reg [7:0] Uitvoer;
 	reg [27:0] C;
 	reg [7:0] Freq;
-	reg in;
+	reg in;					// TODO: hij doet een beetje moeilijk over in (zegt dat hij niet gebruikt wordt) !!!
 	
 	wire k;
 	wire h;
