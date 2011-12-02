@@ -34,7 +34,7 @@ module FAG(
 	// Counter for A
 	always @ (posedge reset or posedge Alaag) begin
 		if (reset)
-			A = 5
+			A = 5;
 		else
 			A = A-1;
 	end
