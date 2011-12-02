@@ -7,10 +7,11 @@ module totaal (
 	output PSfreq,
 	output PSamp)
 	
+	wire hartslag;
+	wire huilVol;
 	
-	
-	huilVolume    huil (clk, reset, ... );
-	hartRitme     hart (clk, reset, ... );
+	huilVolume    huil (clk, reset, hartslagIngang, hartslag );
+	hartRitme     hart (clk, reset, DSPingang,      huilVol );
 	FPGAControler crtl (clk, reset, ... );
 	Output        out  (clk, reset, ... );
 	
