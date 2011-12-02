@@ -1,11 +1,11 @@
-module pathfinder(
+module pathFinder(
 	input clk,
 	input reset,
 	input stress,
 	input Flow,
-	output Fmin
+	output Amin
 	output Fplus
-	output Amin)
+	output Fmin)
 	
 	wire data;
 	reg wrong;
