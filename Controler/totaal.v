@@ -5,7 +5,7 @@ module FPGAControler(
 	input [7:0] hartRitme,
 	output [3:0] A,
 	output [3:0] F
-	)
+	);
 	
 	wire Alaag;
 	wire Flaag;
