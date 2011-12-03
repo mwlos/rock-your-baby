@@ -7,6 +7,7 @@ module huilVolume(
 	
 	assign DSPctrl = clk;
 	
+	
 	always @ (posedge clk or posedge reset) begin
 		if (reset)
 			huilVolume = 0;

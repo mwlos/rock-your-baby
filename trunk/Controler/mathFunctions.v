@@ -4,8 +4,8 @@ module FAG(
 	input Alaag,
 	input Fhoog,
 	input Flaag,
-	output reg [3:0] A,
-	output reg [3:0] F,
+	output reg [2:0] A,
+	output reg [2:0] F,
 	output F0,
 	output AF0
 	);
@@ -17,7 +17,7 @@ module FAG(
 	
 	assign FclkDff = (Fhoog | Flaag);
 	assign Fmin    = (F - 1);
-	assign Fplus   = (F + 1);
+	assign Fplus   = (F + 1);		// wordt nergens gebruikt
 	// Mux t oselect F-1 or F+1
 	assign Fcalc = (Flaag & Fmin) | (Fhoog & Fmin);
 	assign F0  = (F == 0);

@@ -7,8 +7,8 @@ module totaal (
 	output PSfreq,
 	output PSamp);
 	
-	wire hartslag;
-	wire huilVol;
+	wire [7:0] hartslag;
+	wire [7:0] huilVol;
 	wire [2:0] amp;
 	wire [2:0] freq;
 

@@ -3,15 +3,15 @@ module FPGAControler(
 	input reset,
 	input [7:0] huilVolume,
 	input [7:0] hartRitme,
-	output [3:0] A,
-	output [3:0] F
+	output [2:0] A,
+	output [2:0] F
 	);
 	
 	wire Alaag;
 	wire Flaag;
 	wire Fhoog;
 	wire F0;
-	wire AF0;
+	wire AF0;				// wordt nergens gebruikt
 	wire stressGezakt;
 	
 	deltaStress stress   ( clk, reset, huilVolume,   hartRitme, stressGezakt                  );

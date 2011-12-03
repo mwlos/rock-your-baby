@@ -29,10 +29,12 @@ module deltaStress(
 	 reg [2:0] huilOud;
 	 reg hartOut;
 	 reg huilOut;
-	 
+
+	 wire [2:0] huil;
 	 wire [2:0] hart;
 	 reg [2:0] hartOud;
 	 wire hartLaag;
+	 
 	 
 	 assign huil = huilVolume[7:5];	// Geeft warning
 	 assign hart = hartslag[7:5];   // Geeft warning
