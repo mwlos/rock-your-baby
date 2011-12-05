@@ -11,11 +11,11 @@ module FPGAControler(
 	wire Flaag;
 	wire Fhoog;
 	wire F0;
-	wire AF0;				// wordt nergens gebruikt
+	wire AF0;
 	wire stressGezakt;
 	
-	deltaStress stress   ( clk, reset, huilVolume,   hartRitme, stressGezakt                  );
-	pathFinder  pathfind ( clk, reset, stressGezakt, F0,        Alaag,       Fhoog, Flaag     );
+	deltaStress stress   ( clk, reset, huilVolume,   hartRitme, 	stressGezakt                  );
+	pathFinder  pathfind ( clk, reset | AF0, 		 stressGezakt, 		F0,        	 Alaag,       Fhoog, Flaag     );
 	FAG         fag      ( clk, reset, Alaag,Fhoog,  Flaag,     A,           F,     F0,   AF0 );
 	
 endmodule
