@@ -26,7 +26,7 @@ module FAG(
 	// DFF to remember F
 	always @ (posedge clk or posedge reset) begin	// hier stond eerst FclkDff ipv clk
 		if (reset)
-			F = 5;
+			F = 5;				// ik denk dat dit een 4 moet zijn, omdat de uitgang gemaakt is voor [0,4].
 		else if (FclkDff)		// lost een warning op door gebruik te maken van de CE (clock enable) van de FF
 			F = Fcalc;
 	end
@@ -34,7 +34,7 @@ module FAG(
 	// Counter for A
 	always @ (posedge reset or posedge clk) begin	// hier stond eerst Alaag ipv clk
 		if (reset)
-			A = 5;
+			A = 5;				// zelfde als bij de FF voor de FF hier boven
 		else if (Alaag)		// lost een warning op door gebruik te maken van de CE (clock enable) van de FF
 			A = A-1;
 	end

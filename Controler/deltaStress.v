@@ -36,8 +36,8 @@ module deltaStress(
 	 wire hartLaag;
 	 
 	 
-	 assign huil = huilVolume[7:5];	// Geeft warning
-	 assign hart = hartslag[7:5];   // Geeft warning
+	 assign huil = huilVolume[7:5];	// Geeft warning misschien een shift gebruiken. Misschien is deze warning ook te negeren.
+	 assign hart = hartslag[7:5];    // Zelfde
 		
 	always @ (posedge clk or posedge r) begin
 		if (r) huilOud = 0;

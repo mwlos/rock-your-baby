@@ -18,4 +18,8 @@ module totaal (
 	FPGAControler crtl (clk, reset, huilVol,        hartslag, amp,    freq  );
 	Output        out  (clk, reset, freq,           amp,      PSfreq, PSamp );
 	
+	// Er moet een klokvertraging ingebouwd worden.
+	// De modules Output en hartRitme moeten wel gewoon aan de systeemklok aangesloten worden.
+	// Verder moet er een Reset ingebouwd worden om er voor te zorgen dat de regeling opnieuw begint zodra we het pad kwijt raken.
+	
 endmodule
