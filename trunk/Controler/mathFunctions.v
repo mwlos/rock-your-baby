@@ -17,9 +17,9 @@ module FAG(
 	
 	assign FclkDff = (Fhoog | Flaag);
 	assign Fmin    = (F - 1);
-	assign Fplus   = (F + 1);		// wordt nergens gebruikt
+	assign Fplus   = (F + 1);
 	// Mux t oselect F-1 or F+1
-	assign Fcalc = (Flaag & Fmin) | (Fhoog & Fmin);
+	assign Fcalc = (Flaag & Fmin) | (Fhoog & Fplus);
 	assign F0  = (F == 0);
 	assign AF0 = F0 & (A == 0);
 	
