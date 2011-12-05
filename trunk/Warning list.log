@@ -1,0 +1,29 @@
+WARNING:Xst:647 - Input <huilVolume<4:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <hartslag<4:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1710 - FF/Latch <huilVolume_5> (without init value) has a constant value of 0 in block <huil>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <huilVolume_6> (without init value) has a constant value of 0 in block <huil>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <huilVolume_7> (without init value) has a constant value of 0 in block <huil>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <huilOud_0> (without init value) has a constant value of 0 in block <stress>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <huilOud_1> (without init value) has a constant value of 0 in block <stress>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <huilOud_2> (without init value) has a constant value of 0 in block <stress>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <1> (without init value) has a constant value of 0 in block <F>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <huilVolume_0> of sequential type is unconnected in block <huil>.
+WARNING:Xst:2677 - Node <huilVolume_1> of sequential type is unconnected in block <huil>.
+WARNING:Xst:2677 - Node <huilVolume_2> of sequential type is unconnected in block <huil>.
+WARNING:Xst:2677 - Node <huilVolume_3> of sequential type is unconnected in block <huil>.
+WARNING:Xst:2677 - Node <huilVolume_4> of sequential type is unconnected in block <huil>.
+WARNING:Xst:2677 - Node <Uitvoer_2> of sequential type is unconnected in block <hart>.
+WARNING:Xst:2677 - Node <Uitvoer_4> of sequential type is unconnected in block <hart>.
+WARNING:Xst:2677 - Node <Uitvoer_3> of sequential type is unconnected in block <hart>.
+WARNING:Xst:2677 - Node <Uitvoer_1> of sequential type is unconnected in block <hart>.
+WARNING:Xst:2677 - Node <Uitvoer_0> of sequential type is unconnected in block <hart>.
+WARNING:Xst:1710 - FF/Latch <huil/huilVolume_7> (without init value) has a constant value of 0 in block <totaal>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <crtl/fag/F_1> (without init value) has a constant value of 0 in block <totaal>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <crtl/stress/huilOud_0> (without init value) has a constant value of 0 in block <totaal>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <huil/huilVolume_0> of sequential type is unconnected in block <totaal>.
+WARNING:Xst:1710 - FF/Latch <crtl/stress/huilOut> (without init value) has a constant value of 0 in block <totaal>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <hart/Uitvoer_0> of sequential type is unconnected in block <totaal>.
+WARNING:Xst:2677 - Node <hart/Uitvoer_1> of sequential type is unconnected in block <totaal>.
+WARNING:Xst:2677 - Node <hart/Uitvoer_3> of sequential type is unconnected in block <totaal>.
+WARNING:Xst:2677 - Node <hart/Uitvoer_4> of sequential type is unconnected in block <totaal>.
+WARNING:Xst:2677 - Node <hart/Uitvoer_2> of sequential type is unconnected in block <totaal>.
