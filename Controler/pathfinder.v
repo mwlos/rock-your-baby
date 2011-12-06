@@ -13,9 +13,9 @@ module pathFinder(
 	reg wrong;
 	
 	assign data = ( Flow | wrong ) & ( (~Flow) | stress);
-	assign Fmin = (~reset) | ( clk | ( (~Flow) | stress ) );
-	assign Fplus = (~reset) | data;
-	assign Amin = (~reset) | ( (~( (~Flow) | stress )) | ( Flow | wrong ) );
+	assign Fmin = (~reset) & ( clk | ( (~Flow) | stress ) );
+	assign Fplus = (~reset) & data;
+	assign Amin = (~reset) & ( (~( (~Flow) | stress )) | ( Flow | wrong ) );
 	
 	always @ (posedge clk or posedge reset) begin
 		if (reset)
