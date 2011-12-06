@@ -18,8 +18,8 @@ module hartRitme(
 			q = ingang;
 	end
 	
-	always @ (posedge q or posedge resDl) begin
-		if (resDl)
+	always @ (posedge q or posedge resClk) begin
+		if (resClk)
 			slagen = 0;
 		else
 			slagen = slagen + 1;
