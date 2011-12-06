@@ -1,6 +1,6 @@
 module hartRitme(
 	input clk,
-	input clkDl
+	input clkDl,
 	input reset,
 	input ingang,
 	output reg [7:0] out);
@@ -48,6 +48,7 @@ module hartRitme(
 	 */
 	
 	reg q;
+	reg [7:0] slagen;
 	
 	always @ (posedge clk or posedge reset) begin
 		if (reset)
@@ -56,11 +57,11 @@ module hartRitme(
 			q = ingang;
 	end
 	
-	always @ (posedge q or posedge clkDl ) begin
+	always @ (posedge q or posedge reset ) begin
 		if (reset)
 			slagen = 0;
-		end
-			slagen += 1;
+		else
+			slagen = slagen + 1;
 	end
 	
 	always @ (posedge clkDl or posedge reset) begin

@@ -5,7 +5,7 @@ module clkDelay (
 	output SlowClk);
 	
 	reg [27:0] C;
-	reg [27:0] speed;
+	wire [27:0] speed;
 	
 	assign speed = {ingang,20'b0};
 	
