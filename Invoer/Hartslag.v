@@ -7,7 +7,6 @@ module hartRitme(
 	
 	reg q;
 	reg [7:0] slagen;
-	reg resDl, resDl2;
 	
 	assign resClk = (clkDl | reset);
 	

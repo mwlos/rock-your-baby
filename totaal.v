@@ -13,14 +13,18 @@ module totaal (
 	wire [2:0] amp;
 	wire [2:0] freq;
 	wire slowClk;
+	wire error;
+	wire genReset;
 	
-	clkDelay	  delay(clk		, reset, ClockSnelheid,		slowClk				 	);
+	assign genReset = (reset | error);
+	
+	clkDelay	  delay(clk		, genReset, ClockSnelheid,		slowClk				 	);
 
-	huilVolume	  huil (slowClk	, reset, DSPingang,			DSPctrl,  huilVol    	); 
-	hartRitme	  hart (clk		, reset, hartslagIngang,	hartslag             	);
+	huilVolume	  huil (slowClk	, genReset, DSPingang,			DSPctrl,  huilVol    	); 
+	hartRitme	  hart (clk		, genReset, hartslagIngang,	hartslag             	);
 	
-	FPGAControler crtl (slowClk	, reset, huilVol,        	hartslag, amp,    freq  );
-	Output        out  (clk		, reset, freq,           	amp,      PSfreq, PSamp );
+	FPGAControler crtl (slowClk	, genReset, huilVol,        	hartslag, amp,    freq  , error);
+	Output        out  (clk		, genReset, freq,           	amp,      PSfreq, PSamp );
 	
 	// Er moet een Reset ingebouwd worden om er voor te zorgen dat de regeling opnieuw begint zodra we het pad kwijt raken.
 	
