@@ -1,13 +1,17 @@
 module clkDelay (
 	input CLK,
 	input Reset,
+	input [7:0] ingang,
 	output SlowClk);
 	
 	reg [27:0] C;
+	reg [27:0] speed;
+	
+	assign speed = {ingang,20'b0};
 	
 	wire resetmore;
 	
-	assign resetmore = Reset | ( C == 120000000 );		// 5 sec
+	assign resetmore = Reset | ( C == speed );
 	
 	always @ (posedge CLK or posedge resetmore) begin
 		if(resetmore)
@@ -16,6 +20,6 @@ module clkDelay (
 			C = C + 1'b1;
 	end
 	
-	assign SlowClk = (C <= 60000000);					// 50% duty sycle
+	assign SlowClk = (C <= (speed >> 1));	// 50% duty sycle
 	
 endmodule
