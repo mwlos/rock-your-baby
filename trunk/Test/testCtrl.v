@@ -1,4 +1,4 @@
-module totaal (
+module testCtrl (
 	input clk,
 	input reset,
 	input tick,

@@ -1,4 +1,4 @@
-module totaal (
+module testHart (
 	input clk,
 	input reset,
 	input hartslagIngang,
