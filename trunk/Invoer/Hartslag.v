@@ -57,8 +57,8 @@ module hartRitme(
 			q = ingang;
 	end
 	
-	always @ (posedge q or posedge reset ) begin
-		if (reset)
+	always @ (posedge q or posedge clkDl) begin
+		if (clkDl)
 			slagen = 0;
 		else
 			slagen = slagen + 1;
