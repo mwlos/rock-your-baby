@@ -20,6 +20,6 @@ module clkDelay (
 			C = C + 1'b1;
 	end
 	
-	assign SlowClk = (C <= (speed >> 1));	// 50% duty sycle
+	assign SlowClk = (C == 0);	// 50% duty sycle
 	
 endmodule
