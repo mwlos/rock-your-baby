@@ -39,6 +39,7 @@ module deltaStress(
 	 assign huil = huilVolume[7:5];	// Geeft warning misschien een shift gebruiken. Misschien is deze warning ook te negeren.
 	 assign hart = hartslag[3:1];   // Zelfde
 		
+	/*
 	always @ (posedge clk or posedge r) begin
 		if (r) huilOud = 0;
 		else huilOud = huil;
@@ -48,9 +49,10 @@ module deltaStress(
 		if (r) hartOud = 0;
 		else hartOud = hart;
 	end
+	*/
 	
-	assign huilLaag = (huil < huilOud);
-	assign hartLaag = (hart < hartOud);
+	assign huilLaag = (huil < huilOut);
+	assign hartLaag = (hart < hartOut);
 	
 	always @ (posedge clk or posedge r) begin
 		if (r)
@@ -66,6 +68,6 @@ module deltaStress(
 			hartOut = hartLaag;
 	end
 	
-	assign stressLaag = clk & (huilOut | hartOut);
+	assign stressLaag = clk & (huilLaag | hartLaag);
 
 endmodule

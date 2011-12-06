@@ -4,7 +4,8 @@ module FPGAControler(
 	input [7:0] huilVolume,
 	input [7:0] hartRitme,
 	output [2:0] A,
-	output [2:0] F
+	output [2:0] F,
+	output error
 	);
 	
 	wire Alaag;
@@ -13,9 +14,10 @@ module FPGAControler(
 	wire F0;
 	wire AF0;
 	wire stressGezakt;
+	wire error;
 	
-	deltaStress stress   ( clk, reset		, huilVolume,   hartRitme, stressGezakt                  );
-	pathFinder  pathfind ( clk, reset | AF0 , stressGezakt, F0,        Alaag,       Fhoog, Flaag     );
-	FAG         fag      ( clk, reset		, Alaag,Fhoog,  Flaag,     A,           F,     F0,   AF0 );
+	deltaStress stress   ( clk, reset		, huilVolume,   hartRitme, stressGezakt                    );
+	pathFinder  pathfind ( clk, reset | AF0 , stressGezakt, F0,        Alaag,       Fhoog, Flaag, error);
+	FAG         fag      ( clk, reset		, Alaag,Fhoog,  Flaag,     A,           F,     F0,    AF0  );
 	
 endmodule

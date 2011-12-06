@@ -11,17 +11,23 @@ module FAG(
 	);
 	
 	wire FclkDff;
-	wire Fmin;
-	wire Fplus;
-	wire Fcalc;
+	wire [2:0] Fmin;
+	wire [2:0] Fplus;
+	reg [2:0] Fcalc;
 	
 	assign FclkDff = (Fhoog | Flaag);
 	assign Fmin    = (F - 1);
 	assign Fplus   = (F + 1);
-	// Mux t oselect F-1 or F+1
-	assign Fcalc = (Flaag & Fmin) | (Fhoog & Fplus);
 	assign F0  = (F == 0);
 	assign AF0 = F0 & (A == 0);
+	
+	// Mux t oselect F-1 or F+1
+	always @ (Fhoog or Fmin or Fplus) begin
+		case (Fhoog)
+			0: Fcalc = Fmin;
+			1: Fcalc = Fplus;
+		endcase
+	end
 	
 	// DFF to remember F
 	always @ (posedge clk or posedge reset) begin	// hier stond eerst FclkDff ipv clk
