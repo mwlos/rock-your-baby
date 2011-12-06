@@ -11,11 +11,6 @@ module hartRitme(
 	
 	assign resClk = (clkDl | reset);
 	
-	always @ (posedge clk) begin
-		resDl = resDl2;
-		resDl2 = resDl;
-	end
-	
 	always @ (posedge clk or posedge reset) begin
 		if (reset)
 			q = 0;
