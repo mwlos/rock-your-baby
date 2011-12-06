@@ -14,8 +14,8 @@ module FPGAControler(
 	wire AF0;
 	wire stressGezakt;
 	
-	deltaStress stress   ( clk, reset, huilVolume,   hartRitme, 	stressGezakt                  );
-	pathFinder  pathfind ( clk, reset | AF0, 		 stressGezakt, 		F0,        	 Alaag,       Fhoog, Flaag     );
-	FAG         fag      ( clk, reset, Alaag,Fhoog,  Flaag,     A,           F,     F0,   AF0 );
+	deltaStress stress   ( clk, reset		, huilVolume,   hartRitme, stressGezakt                  );
+	pathFinder  pathfind ( clk, reset | AF0 , stressGezakt, F0,        Alaag,       Fhoog, Flaag     );
+	FAG         fag      ( clk, reset		, Alaag,Fhoog,  Flaag,     A,           F,     F0,   AF0 );
 	
 endmodule
