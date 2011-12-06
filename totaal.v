@@ -12,6 +12,7 @@ module totaal (
 	wire [7:0] huilVol;
 	wire [2:0] amp;
 	wire [2:0] freq;
+	wire slowClk;
 	
 	clkDelay	  delay(clk		, reset, ClockSnelheid,		slowClk				 	);
 
