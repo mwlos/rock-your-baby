@@ -14,7 +14,6 @@ module FPGAControler(
 	wire F0;
 	wire AF0;
 	wire stressGezakt;
-	wire error;
 	
 	deltaStress stress   ( clk, reset		, huilVolume,   hartRitme, stressGezakt                    );
 	pathFinder  pathfind ( clk, reset | AF0 , stressGezakt, F0,        Alaag,       Fhoog, Flaag, error);

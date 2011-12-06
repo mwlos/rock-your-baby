@@ -10,6 +10,7 @@ module pathFinder(
 	);
 	
 	wire data;
+	reg oldAmin;
 	reg wrong;
 	
 	assign data = ( Flow | wrong ) & ( (~Flow) | stress);
