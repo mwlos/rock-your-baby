@@ -1,9 +1,10 @@
 module hartRitme(
-	input CLK,
-	input Reset,
-	input Ingang,
-	output reg [7:0] Uitvoer);
-
+	input clk,
+	input clkDl
+	input reset,
+	input ingang,
+	output reg [7:0] out);
+/*
 	reg [27:0] C;
 	reg [7:0] Freq;
 	reg in;					// TODO: hij doet een beetje moeilijk over in (zegt dat hij niet gebruikt wordt) !!!
@@ -39,6 +40,34 @@ module hartRitme(
 			Freq=0;
 		else 
 			Freq = Freq + 1'b1;
+	end
+*/
+	
+	/*
+	 * Module van Steven:
+	 */
+	
+	reg q;
+	
+	always @ (posedge clk or posedge reset) begin
+		if (reset)
+			q = 0;
+		else
+			q = ingang;
+	end
+	
+	always @ (posedge q or posedge clkDl ) begin
+		if (reset)
+			slagen = 0;
+		end
+			slagen += 1;
+	end
+	
+	always @ (posedge clkDl or posedge reset) begin
+		if (reset)
+			out = 0;
+		else
+			out = slagen;
 	end
 
 endmodule
