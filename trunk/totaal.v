@@ -1,8 +1,9 @@
 module totaal (
 	input clk,
 	input reset,
-	input DSPingang,
+	input [7:0] DSPingang,
 	input hartslagIngang,
+	input [7:0] ClockSnelheid,
 	output DSPctrl,
 	output PSfreq,
 	output PSamp);
@@ -12,14 +13,14 @@ module totaal (
 	wire [2:0] amp;
 	wire [2:0] freq;
 	
-	clkDelay	  delay(clk		, reset, slowClk								 );
+	clkDelay	  delay(clk		, reset, ClockSnelheid,		slowClk				 	);
 
-	huilVolume	  huil (slowClk	, reset, DSPingang,		DSPctrl,  huilVol        ); 
-	hartRitme	  hart (clk		, reset, hartslagIngang,	hartslag             );
+	huilVolume	  huil (slowClk	, reset, DSPingang,			DSPctrl,  huilVol    	); 
+	hartRitme	  hart (clk		, reset, hartslagIngang,	hartslag             	);
 	
-	FPGAControler crtl (slowClk	, reset, huilVol,        hartslag, amp,    freq  );
-	Output        out  (clk		, reset, freq,           amp,      PSfreq, PSamp );
+	FPGAControler crtl (slowClk	, reset, huilVol,        	hartslag, amp,    freq  );
+	Output        out  (clk		, reset, freq,           	amp,      PSfreq, PSamp );
 	
-	// Verder moet er een Reset ingebouwd worden om er voor te zorgen dat de regeling opnieuw begint zodra we het pad kwijt raken.
+	// Er moet een Reset ingebouwd worden om er voor te zorgen dat de regeling opnieuw begint zodra we het pad kwijt raken.
 	
 endmodule
