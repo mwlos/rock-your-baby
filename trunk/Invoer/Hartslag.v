@@ -50,6 +50,8 @@ module hartRitme(
 	reg q;
 	reg [7:0] slagen;
 	
+	assign resClk = (clkDl | reset)
+	
 	always @ (posedge clk or posedge reset) begin
 		if (reset)
 			q = 0;
@@ -57,8 +59,8 @@ module hartRitme(
 			q = ingang;
 	end
 	
-	always @ (posedge q or posedge clkDl) begin
-		if (clkDl)
+	always @ (posedge q or posedge resClk) begin
+		if (resClk)
 			slagen = 0;
 		else
 			slagen = slagen + 1;
