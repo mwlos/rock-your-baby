@@ -13,18 +13,18 @@ module hartRitme(
 	
 	always @ (posedge clk) begin
 		resDl = resDl2;
-		resDl2 = clkDl;
+		resDl2 = resDl;
 	end
 	
-	always @ (posedge clk or posedge ) begin
+	always @ (posedge clk or posedge reset) begin
 		if (reset)
 			q = 0;
 		else
 			q = ingang;
 	end
 	
-	always @ (posedge q or posedge resClk) begin
-		if (resClk)
+	always @ (posedge q or posedge resDl) begin
+		if (resDl)
 			slagen = 0;
 		else
 			slagen = slagen + 1;
