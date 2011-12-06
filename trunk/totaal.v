@@ -26,6 +26,4 @@ module totaal (
 	FPGAControler crtl (slowClk	, genReset, huilVol,        	hartslag, amp,    freq  , error);
 	Output        out  (clk		, genReset, freq,           	amp,      PSfreq, PSamp );
 	
-	// Er moet een Reset ingebouwd worden om er voor te zorgen dat de regeling opnieuw begint zodra we het pad kwijt raken.
-	
 endmodule
