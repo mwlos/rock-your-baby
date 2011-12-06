@@ -4,6 +4,39 @@ module hartRitme(
 	input reset,
 	input ingang,
 	output reg [7:0] out);
+	
+	reg q;
+	reg [7:0] slagen;
+	reg resDl, resDl2;
+	
+	assign resClk = (clkDl | reset);
+	
+	always @ (posedge clk) begin
+		resDl = resDl2;
+		resDl2 = clkDl;
+	end
+	
+	always @ (posedge clk or posedge ) begin
+		if (reset)
+			q = 0;
+		else
+			q = ingang;
+	end
+	
+	always @ (posedge q or posedge resClk) begin
+		if (resClk)
+			slagen = 0;
+		else
+			slagen = slagen + 1;
+	end
+	
+	always @ (posedge clkDl or posedge reset) begin
+		if (reset)
+			out = 0;
+		else
+			out = slagen;
+	end
+	
 /*
 	reg [27:0] C;
 	reg [7:0] Freq;
@@ -42,35 +75,5 @@ module hartRitme(
 			Freq = Freq + 1'b1;
 	end
 */
-	
-	/*
-	 * Module van Steven:
-	 */
-	
-	reg q;
-	reg [7:0] slagen;
-	
-	assign resClk = (clkDl | reset)
-	
-	always @ (posedge clk or posedge reset) begin
-		if (reset)
-			q = 0;
-		else
-			q = ingang;
-	end
-	
-	always @ (posedge q or posedge resClk) begin
-		if (resClk)
-			slagen = 0;
-		else
-			slagen = slagen + 1;
-	end
-	
-	always @ (posedge clkDl or posedge reset) begin
-		if (reset)
-			out = 0;
-		else
-			out = slagen;
-	end
 
 endmodule
