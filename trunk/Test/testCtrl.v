@@ -13,7 +13,7 @@ module testCtrl (
 	reg slowClk;
 	
 	always @ (posedge clk or posedge reset) begin
-		if ()
+		if (reset)
 			slowClk = 0;
 		else
 			slowClk = tick;
