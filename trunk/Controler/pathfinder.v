@@ -1,37 +1,28 @@
+`timescale 1ns / 1ps
 module pathFinder(
 	input clk,
 	input reset,
 	input stress,
-	input Flow,
 	output Amin,
 	output Fplus,
 	output Fmin,
 	output ERROR
 	);
 	
-	wire data;
-	reg oldAmin;
-	reg wrong;
+	wire stressDel;
+	wire resetDel;
+	wire AminDel;
 	
-	assign data = ( Flow | wrong ) & ( (~Flow) | stress);
-	assign Fmin = (~reset) & ( clk | ( (~Flow) | stress ) );
-	assign Fplus = (~reset) & data;
-	assign Amin = (~reset) & ( (~( (~Flow) | stress )) | ( Flow | wrong ) );
+	delay_1_1 stressDelay (clk, reset, stress, stressDel);
+	delay_1   resetDelay  (clk, reset, reset,  resetDel);
+	delay_n_1 AminDelay   (clk, reset, Amin,   AminDel);
 	
-	always @ (posedge clk or posedge reset) begin
-		if (reset)
-			wrong = 0;
-		else
-			wrong = data;
-	end
+	assign trigger = resetDel & ~reset;
 	
-	always @ (posedge clk or posedge reset) begin
-		if (reset)
-			oldAmin = 0;
-		else 
-			oldAmin = Amin;
-	end
+	assign Fmin  =  stress              |  trigger;
+	assign Fplus = ~stress &  stressDel & ~trigger;
+	assign Amin  = ~stress & ~stressDel & ~trigger;
 	
-	assign ERROR = (oldAmin & ~stress);
+	assign ERROR = AminDel & Amin & ~reset;
 	
 endmodule
