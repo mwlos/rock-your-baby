@@ -6,42 +6,50 @@ module FAG(
 	input Flaag,
 	output reg [2:0] A,
 	output reg [2:0] F,
-	output F0,
-	output AF0
+	output F0
 	);
 	
 	wire FclkDff;
 	wire [2:0] Fmin;
 	wire [2:0] Fplus;
+	wire FhDel;
+	wire FlDel;
 	reg [2:0] Fcalc;
 	
-	assign FclkDff = (Fhoog | Flaag);
+	assign F0  = (F == 0);
+	
+	delay_1 delayFh (clk,reset,Fhoog,FhDel);
+	delay_1 delayFl (clk,reset,Flaag,FlDel);
+	
+	assign Fh = Fhoog &  ~F0             ;
+	assign Fl = Flaag &  ~F0             ;
+	assign Al = Alaag | ( F0 & ~(A==0) ) ;
+	
+	assign FclkDff = ( Fh | Fl );
 	assign Fmin    = (F - 1);
 	assign Fplus   = (F + 1);
-	assign F0  = (F == 0);
-	assign AF0 = F0 & (A == 0);
 	
 	// Mux t oselect F-1 or F+1
-	always @ (Fhoog or Fmin or Fplus) begin
-		case (Fhoog)
-			0: Fcalc = Fmin;
-			1: Fcalc = Fplus;
+	always @ (Flaag or Fmin or Fplus) begin
+		case (Flaag)
+			0: Fcalc = Fplus;
+			1: Fcalc = Fmin;
 		endcase
 	end
 	
 	// DFF to remember F
-	always @ (posedge clk or posedge reset) begin	// hier stond eerst FclkDff ipv clk
+	always @ (negedge clk or posedge reset) begin	// hier stond eerst FclkDff ipv clk
 		if (reset)
 			F = 5;				// ik denk dat dit een 4 moet zijn, omdat de uitgang gemaakt is voor [0,4].
-		else if (FclkDff)		// lost een warning op door gebruik te maken van de CE (clock enable) van de FF
+		else if (FclkDff)                // lost een warning op door gebruik te maken van de CE (clock enable) van de FF
 			F = Fcalc;
 	end
 	
 	// Counter for A
-	always @ (posedge reset or posedge clk) begin	// hier stond eerst Alaag ipv clk
+	always @ (negedge clk or posedge reset) begin	// hier stond eerst Alaag ipv clk
 		if (reset)
 			A = 5;				// zelfde als bij de FF voor de FF hier boven
-		else if (Alaag)		// lost een warning op door gebruik te maken van de CE (clock enable) van de FF
+		else if (Al)		   // lost een warning op door gebruik te maken van de CE (clock enable) van de FF
 			A = A-1;
 	end
 	
