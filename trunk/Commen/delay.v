@@ -13,7 +13,10 @@ module delay_1(
 	 reg [1:0] data;
 	 
 	 always @ (posedge clk or posedge reset) begin
-		data = { (data[0:0] & ~reset),signal};
+		if (reset)
+			data = 0;
+		else
+			data = { (data[0:0] & ~reset),signal};
 	 end
 	 
 	 assign q = data[1:1];
