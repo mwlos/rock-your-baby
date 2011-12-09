@@ -6,7 +6,8 @@ module FAG(
 	input Flaag,
 	output reg [2:0] A,
 	output reg [2:0] F,
-	output F0
+	output F0,
+	output error
 	);
 	
 	wire FclkDff;
@@ -28,6 +29,8 @@ module FAG(
 	assign FclkDff = ( Fh | Fl );
 	assign Fmin    = (F - 1);
 	assign Fplus   = (F + 1);
+	
+	assign error = ( (A==0) & Alaag ) | ( (F==0) & Flaag );
 	
 	// Mux t oselect F-1 or F+1
 	always @ (Flaag or Fmin or Fplus) begin

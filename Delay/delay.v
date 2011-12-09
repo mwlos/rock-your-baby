@@ -16,7 +16,7 @@ module delay_1(
 		if (reset)
 			data = 0;
 		else
-			data = { (data[0:0] & ~reset),signal};
+			data = {data[0:0],signal};
 	 end
 	 
 	 assign q = data[1:1];
@@ -66,5 +66,25 @@ module delay_n_1(
 	 end
 	 
 	 assign q = data[1:1];
+	 
+endmodule
+
+module delay_3(
+    input clk,
+    input reset,
+    input [2:0] signal,
+    output [2:0] q
+    );
+	 
+	 reg [5:0] data;
+	 
+	 always @ (posedge clk or posedge reset) begin
+		if (reset)
+			data = 0;
+		else
+			data = {data[2:0],signal};
+	 end
+	 
+	 assign q = data[5:3];
 	 
 endmodule
