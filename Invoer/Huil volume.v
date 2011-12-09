@@ -6,7 +6,7 @@ module huilVolume(
 	input DSPready,
 	output reg [7:0] huilVolume);
 	
-	reg [15:0] Memory;
+	reg [13:0] Memory;
 	wire resetmore;
 	
 	assign resetmore = ( reset | slowClk );
@@ -18,6 +18,6 @@ module huilVolume(
 			Memory = Memory + DSPinvoer;
 	end
 	
-	assign huilVolume = [15:8] Memory;
+	assign huilVolume = [13:6] Memory;
 	
 endmodule
