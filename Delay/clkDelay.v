@@ -1,25 +1,35 @@
 module clkDelay (
 	input CLK,
 	input Reset,
-	input [7:0] ingang,
-	output SlowClk);
+	output Slow4,
+	output Slow12);
 	
 	reg [27:0] C;
-	wire [27:0] speed;
+	reg [1:0]  D;
 	
-	assign speed = {ingang,20'b10};		// als ingang 0 is, toch een kleine klokvertraging
+	wire reset4;
+	wire reset12;
 	
-	wire resetmore;
+	assign reset4 = reset12 | ( C >= 96000000 );
 	
-	assign resetmore = Reset | ( C >= speed );
-	
-	always @ (posedge CLK or posedge resetmore) begin
-		if(resetmore)
+	always @ (posedge CLK or posedge reset4) begin
+		if(reset4)
 			C = 0;
 		else
 			C = C + 1;
 	end
 	
-	assign SlowClk = (C == 0);
+	assign Slow4 = (C == 0);
+	
+	assign reset12 = Reset | ( D >= 3 );
+
+	always @ (posedge Slow4 or posedge reset12) begin
+		if(reset12)
+			D = 0;
+		else
+			D = D + 1;
+	end
+	
+	assign Slow12 = ( (D == 0) & (C == 0) );
 	
 endmodule

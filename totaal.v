@@ -4,7 +4,6 @@ module totaal (
 	input start,
 	input [7:0] DSPingang,
 	input hartslagIngang,
-	input [7:0] ClockSnelheid,
 	input DSPready,
 	output PSfreq,
 	output PSamp);
@@ -14,7 +13,8 @@ module totaal (
 	wire [2:0] amp;
 	wire [2:0] freq;
 	
-	wire slowClk;
+	wire slow4;
+	wire slow12;
 	wire error;
 	wire intReset;
 	wire extReset;
@@ -25,15 +25,15 @@ module totaal (
 	// Reset en Delay modules
 	
 	holdReset     starter(clk   	, extReset, stressContinu,      intReset);
-	clkDelay	  delay	 (clk		, extReset, ClockSnelheid,		slowClk);
+	clkDelay	  delay	 (clk		, extReset, slow4		 ,		slow12);
 	
 	// Input modules
 
-	stressIn	  stress (clk, extReset, slowClk, huilVol, DSPingang, DSPready, stressLaag, stressContinu); 
+	stressIn	  stress (clk, extReset, slow4, huilVol, DSPingang, DSPready, stressLaag, stressContinu); 
 	
 	// Controler
 	
-	FPGAControler crtl 	 (slowClk, intReset, stressLaag, amp, freq, error);
+	FPGAControler crtl 	 (slow4, intReset, stressLaag, amp, freq, error);
 	
 	// Output module
 	
