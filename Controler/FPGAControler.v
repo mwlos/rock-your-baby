@@ -4,7 +4,7 @@ module FPGAControler(
 	input stressGezakt,
 	output [2:0] A,
 	output [2:0] F,
-	output err,
+	output err
 	);
 	
 	wire Alaag;
