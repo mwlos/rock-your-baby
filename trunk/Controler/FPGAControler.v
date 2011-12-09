@@ -10,8 +10,9 @@ module FPGAControler(
 	wire Alaag;
 	wire Flaag;
 	wire Fhoog;
-	wire stressGezakt;
 	wire res;
+	wire err1;
+	wire err2;
 	
 	assign err = (err1 | err2)
 	
