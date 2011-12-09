@@ -5,7 +5,7 @@ module totaal (
 	input [7:0] DSPingang,
 	input hartslagIngang,
 	input [7:0] ClockSnelheid,
-	output DSPctrl,
+	input DSPready,
 	output PSfreq,
 	output PSamp);
 	
@@ -28,7 +28,7 @@ module totaal (
 	
 	// Input modules
 
-	huilVolume	  huil 	 (slowClk	, intReset, DSPingang,			DSPctrl,  		huilVol    				); 
+	huilVolume	  huil 	 (clk		, slowClk,  intReset, 			DSPingang,		DSPready,  		huilVol ); 
 	hartRitme	  hart 	 (clk		, slowClk,	intReset, 			hartslagIngang,	hartslag             	);
 	
 	// Controler
