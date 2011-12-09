@@ -1,13 +1,13 @@
 module deltaStressHuil(
 		input clk,
 		input reset,
-		input status[2:0],
+		input [2:0] status,
 		output gedaald,
 		output gelijk
 		);
 		
-	wire[2:0] data;	
-	wire[2:0] dataDly;
+	wire [2:0] data;	
+	wire [2:0] dataDly;
 	wire const;
 	wire constDly;
 	
