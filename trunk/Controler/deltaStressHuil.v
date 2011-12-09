@@ -1,4 +1,4 @@
-module deltaStress(
+module deltaStressHuil(
 		input clk,
 		input reset,
 		input status[2:0],
