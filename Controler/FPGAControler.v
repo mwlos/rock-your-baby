@@ -10,9 +10,12 @@ module FPGAControler(
 	wire Alaag;
 	wire Flaag;
 	wire Fhoog;
+	wire stressGezakt;
 	wire res;
 	
-	pathFinder  pathfind ( clk, reset | res , stressGezakt, Alaag    , Fhoog       , Flaag, err     );
-	FAG         math     ( clk, reset       , Alaag       , Fhoog    , Flaag       , A    , F  , res);
+	assign err = (err1 | err2)
+	
+	pathFinder  pathfind ( clk, reset | res , stressGezakt, Alaag    , Fhoog       , Flaag, err1     );
+	FAG         math     ( clk, reset       , Alaag       , Fhoog    , Flaag       , A    , F  , res, err2);
 	
 endmodule

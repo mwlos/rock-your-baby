@@ -16,27 +16,27 @@ module totaal (
 	
 	wire slowClk;
 	wire error;
-	wire genReset;
 	wire intReset;
+	wire extReset;
+	wire stressContinu;
 	
-	assign genReset = 	 (reset | error);
+	assign extReset = (reset | error) & ~intReset;
 	
 	// Reset en Delay modules
 	
-	holdReset     starter(clk   	, genReset, start,              intReset                                );
-	clkDelay	  delay	 (clk		, intReset, ClockSnelheid,		slowClk				 					);
+	holdReset     starter(clk   	, extReset, stressContinu,      intReset);
+	clkDelay	  delay	 (clk		, extReset, ClockSnelheid,		slowClk);
 	
 	// Input modules
 
-	huilVolume	  huil 	 (clk		, slowClk,  intReset, 			DSPingang,		DSPready,  		huilVol ); 
-	hartRitme	  hart 	 (clk		, slowClk,	intReset, 			hartslagIngang,	hartslag             	);
+	stressIn	  stress (clk, extReset, slowClk, huilVol, DSPingang, DSPready, stressLaag, stressContinu); 
 	
 	// Controler
 	
-	FPGAControler crtl 	 (slowClk	, intReset, huilVol,        	hartslag, 		amp,    freq  , error	);
+	FPGAControler crtl 	 (slowClk, intReset, stressLaag, amp, freq, error);
 	
 	// Output module
 	
-	Output        out 	 (clk		, intReset, freq,           	amp,      		PSfreq, PSamp 			);
+	Output        out 	 (clk, extReset, freq, amp, PSfreq, PSamp);
 	
 endmodule
