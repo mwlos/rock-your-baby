@@ -20,10 +20,10 @@ module totaal (
 	wire extReset;
 	wire stressContinu;
 	
-	assign extReset = (reset | error) & ~intReset;
 	
 	// Reset en Delay modules
 	
+	bufferReset		buffer(clk		, reset,	error, intReset,	extReset);
 	holdReset     starter(clk   	, extReset, stressContinu,      intReset);
 	clkDelay	  delay	 (clk		, extReset, slow4		 ,		slow12);
 	
