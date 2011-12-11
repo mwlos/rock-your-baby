@@ -23,9 +23,9 @@ module totaal (
 	
 	// Reset en Delay modules
 	
-	bufferReset		buffer(clk		, reset,	error, intReset,	extReset);
+	bufferReset	  buffer (clk		, reset,	error, intReset,	extReset);
 	holdReset     starter(clk   	, extReset, stressContinu,      intReset);
-	clkDelay	  delay	 (clk		, extReset, slow4		 ,		slow12);
+	clkDelay	  delay	 (clk		, extReset, slow4,				slow12  );
 	
 	// Input modules
 
