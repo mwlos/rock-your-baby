@@ -88,3 +88,43 @@ module delay_3(
 	 assign q = data[5:3];
 	 
 endmodule
+
+module delay_4(
+    input clk,
+    input reset,
+    input [3:0] signal,
+    output [3:0] q
+    );
+	 
+	 reg [7:0] data;
+	 
+	 always @ (posedge clk or posedge reset) begin
+		if (reset)
+			data = 0;
+		else
+			data = {data[3:0],signal};
+	 end
+	 
+	 assign q = data[7:4];
+	 
+endmodule
+
+module delay_4_2( // 4 wide 1 tick delay
+    input clk,
+    input reset,
+    input [3:0] signal,
+    output [3:0] q
+    );
+	 
+	 reg [11:0] data;
+	 
+	 always @ (posedge clk or posedge reset) begin
+		if (reset)
+			data = 0;
+		else
+			data = {data[7:0],signal};
+	 end
+	 
+	 assign q = data[11:8];
+	 
+endmodule
