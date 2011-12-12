@@ -7,6 +7,7 @@ module huilVolume(
 	output [7:0] huilVolume);
 	
 	reg [13:0] Memory;
+	reg [7:0] MemoryOut;
 	reg ready;
 	reg [7:0] DSP;
 	wire resetmore;
@@ -34,6 +35,10 @@ module huilVolume(
 			Memory = Memory + DSP;
 	end
 	
-	assign huilVolume = Memory[13:6];
+	always @ (posedge slowClk) begin
+			MemoryOut=Memory[13:6];
+	end
 	
+	assign huilVolume = MemoryOut;
+
 endmodule
