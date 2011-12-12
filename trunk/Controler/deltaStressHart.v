@@ -10,7 +10,7 @@ module deltaStressHart(
 	wire hartDel;
 	
 	delay_4_2 delay (clk4,reset,hart,hartDel);
-	assign gedaald = clk12 & (har>hartDel);
+	assign gedaald = clk12 & (hart>hartDel);
 	assign gelijk = clk12 & (hart==hartDel);
 	
 endmodule
