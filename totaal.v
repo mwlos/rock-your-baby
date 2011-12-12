@@ -29,7 +29,7 @@ module totaal (
 	
 	// Input modules
 
-	stressIn	  stress (clk, extReset, slow4, huilVol, DSPingang, DSPready, stressLaag, stressContinu); 
+	stress	  Ingang (clk, extReset, slow4, huilVol, DSPingang, DSPready, stressLaag, stressContinu); 
 	
 	// Controler
 	

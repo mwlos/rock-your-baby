@@ -1,4 +1,4 @@
-module deltaStressHart(
+module deltaStressHuil(
 		input reset,
 		input clk12,
 		input [3:0] huil,
