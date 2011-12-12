@@ -4,6 +4,7 @@ module stress(
 		input clk4,
 		input clk12,
 		input [8:0] huil,
+		input DSPctrl,
 		input hart,
 		output gedaald,
 		output gelijk
