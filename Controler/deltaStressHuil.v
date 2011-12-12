@@ -1,29 +1,15 @@
-module deltaStressHuil(
-		input clk,
+module deltaStressHart(
 		input reset,
-		input [2:0] status,
+		input clk12,
+		input [3:0] huil,
 		output gedaald,
 		output gelijk
 		);
-		
-	wire [2:0] data;	
-	wire [2:0] dataDly;
-	wire const;
-	wire constDly;
 	
-	assign data = status;
+	wire huilDel;
 	
-	delay_3 delay1 (clk, reset, data, dataDly);
-	
-	assign gedaald = (data < dataDly);	
-	assign const = (data==dataDly);
-	
-	delay_1 delay2 (clk, reset, const, constDly);
-	
-	assign gelijk = (const&constDly);
+	delay_4 delay (clk12,reset,huil,huilDel);
+	assign gedaald = clk12 & (huil<huilDel);
+	assign gelijk = clk12 & (huil==huilDel);
 	
 endmodule
-	
-	
-	
-	
