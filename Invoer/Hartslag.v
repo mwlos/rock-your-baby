@@ -1,73 +1,51 @@
 module hartRitme(
 	input clk,
-	input clkDl,
 	input reset,
 	input ingang,
-	output reg [7:0] out);
+	input slowClk,
+	output reg [3:0] uitvoer);
+
+	reg [24:0] count;
+	reg [3:0] freq;
+	reg  in;
+	wire inDelay;
 	
-	reg q;
-	reg [7:0] slagen;
+	wire invInDelay;
+	wire en;
+	wire resetMore;
 	
-	assign resClk = (clkDl | reset);
+	assign invInDelay = ( inDelay ^ 1);
+	assign en = (invInDelay & in);
+	assign resetMore = ( reset | en);
 	
 	always @ (posedge clk or posedge reset) begin
 		if (reset)
-			q = 0;
-		else
-			q = ingang;
-	end
-	
-	always @ (posedge q or posedge resClk) begin
-		if (resClk)
-			slagen = 0;
-		else
-			slagen = slagen + 1;
-	end
-	
-	always @ (posedge clkDl or posedge reset) begin
-		if (reset)
-			out = 0;
-		else
-			out = slagen;
-	end
-	
-/*
-	reg [27:0] C;
-	reg [7:0] Freq;
-	reg in;					// TODO: hij doet een beetje moeilijk over in (zegt dat hij niet gebruikt wordt) !!!
-	
-	wire k;
-	wire h;
-	assign h = (C==0);
-	assign k = (Reset || h);
-	
-	always @ (posedge CLK or posedge Reset) begin
-		if (Reset)
 			in = 0;
 		else
-			in = Ingang;
+			in = ingang;
 	end
-
-	always @ (posedge CLK or posedge Reset) begin
-		if(Reset)
-			C=0;
+	
+	always @ (posedge clk or posedge resetMore) begin
+		if (resetMore)
+			count = 0;
 		else
-			C = C + 1'b1;
+			count = count + 1;
 	end
-
-	always @ (posedge Reset or posedge h) begin
-		if(h)
-			Uitvoer = Freq;
+	
+	always @ (posedge clk or posedge resetMore) begin
+		if (resetMore)
+			freq = 0;
 		else
-			Uitvoer = 0;
+			freq = count[24:21];
+	end
+	
+	always @ (posedge slowClk or posedge resetMore) begin
+		if (resetMore)
+			uitvoer= 0;
+		else
+			uitvoer = freq;
 	end
 
-	always @ (posedge k or posedge in) begin
-		if(k)
-			Freq=0;
-		else 
-			Freq = Freq + 1'b1;
-	end
-*/
-
+	delay_1 delay (clk,reset,in,inDelay);
+	
 endmodule
