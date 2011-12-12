@@ -3,7 +3,7 @@ module stress(
 		input reset,
 		input clk4,
 		input clk12,
-		input [8:0] huil,
+		input [7:0] huil,
 		input DSPctrl,
 		input hart,
 		output gedaald,
@@ -20,8 +20,8 @@ module stress(
 	hartRitme  hartRit (clk,clk4,reset,hart,hartData);
 	huilVolume huilVol (clk,clk4,reset,huil,DSPctrl,huilData);
 	
-	deltaStressHart hart (reset,clk12,hartData,hartLaag,hartGelijk);
-	deltaStressHuil huil (reset,clk4,clk12,huilData,huilLaag[7:4],huilGelijk);
+	deltaStressHart hart1 (reset,clk12,hartData,hartLaag,hartGelijk);
+	deltaStressHuil huil1 (reset,clk12,huilData[7:4],huilLaag,huilGelijk);
 	
 	assign gedaald = (hartLaag|huilLaag);
 	assign gelijk  = (hartGelijk|huilGelijk);
