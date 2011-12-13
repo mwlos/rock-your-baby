@@ -1,13 +1,14 @@
 module testHart (
 	input clk,
 	input reset,
-	input hartslagIngang,
-	input [7:0] ClockSnelheid,
-	output [7:0] hartslag);
+	input hartin,
+	output [3:0] hartvol
+	);
 	
-	wire slowClk;
+	wire slow4;
+	wire slow12;
 	
-	clkDelay	  delay(clk		, reset, ClockSnelheid,		slowClk				 	);
-	hartRitme	  hart (clk		, slowClk,  reset, hartslagIngang,	hartslag             	);
+	clkDelay	  delay(clk		, reset		, slow4, slow12				 			);
+	hartRitme	  hart (clk		, reset, hartin,slow4,  hartvol  );
 	
 endmodule
