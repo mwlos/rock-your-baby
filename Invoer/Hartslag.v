@@ -3,21 +3,15 @@ module hartRitme(
 	input reset,
 	input ingang,
 	input slowClk,
-	output [3:0] uitvoer,
-	output en);
+	output reg [5:0] uitvoer);
 
 	reg [24:0] count;
-	reg [3:0] freq;
+	reg [5:0] freq;
 	reg  in;
-	wire inDelay;
-	
-	wire invInDelay;
+
 	wire resetMore;
-	wire resetmoreDel;
 	
-	assign invInDelay = ( ~inDelay );
-	assign en = (invInDelay & in);
-	assign resetMore = ( reset | en);
+	assign resetMore = ( reset | in);
 	
 	always @ (posedge clk or posedge reset) begin
 		if (reset)
@@ -26,28 +20,25 @@ module hartRitme(
 			in = ingang;
 	end
 	
-	always @ (posedge clk or posedge resetmoreDel) begin
-		if (resetmoreDel)
+	always @ (posedge clk or posedge resetMore) begin
+		if (resetMore)
 			count = 0;
 		else
 			count = count + 1;
 	end
 	
-	always @ (posedge clk or posedge resetMore) begin
-		if (resetMore)
+	always @ (posedge in or posedge reset) begin
+		if (reset)
 			freq = 0;
-		else if (en)
-			freq = count[24:21];
+		else
+			freq = count[23:18];
 	end
 	
-	always @ (posedge slowClk or posedge resetMore) begin
-		if (resetMore)
-			uitvoer= 0;
+	always @ (posedge slowClk or posedge reset) begin
+		if (reset)
+			uitvoer = 0;
 		else
 			uitvoer = freq;
 	end
-
-	delay_1 delay1 (clk,reset,in,inDelay);
-	delay_1 delay2 (clk,reset,resetmore,resetmoreDel);
 	
 endmodule
