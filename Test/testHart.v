@@ -2,7 +2,7 @@ module testHart (
 	input clk,
 	input reset,
 	input hartin,
-	output [3:0] hartvol
+	output [7:0] hartvol
 	);
 	
 	wire slow4;

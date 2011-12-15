@@ -3,10 +3,10 @@ module hartRitme(
 	input reset,
 	input ingang,
 	input slowClk,
-	output reg [5:0] uitvoer);
+	output reg [7:0] uitvoer);
 
 	reg [24:0] count;
-	reg [5:0] freq;
+	reg [7:0] freq;
 	reg  in;
 
 	wire resetMore;
@@ -31,7 +31,7 @@ module hartRitme(
 		if (reset)
 			freq = 0;
 		else
-			freq = count[23:18];
+			freq = count[23:16];
 	end
 	
 	always @ (posedge slowClk or posedge reset) begin
