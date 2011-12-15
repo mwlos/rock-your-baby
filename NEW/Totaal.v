@@ -4,6 +4,7 @@ module totaal (
 	input [7:0] DSPingang,
 	input hartslagIngang,
 	input DSPready,
+	input extReset,
 	output PSfreq,
 	output PSamp);
 	
@@ -17,17 +18,17 @@ module totaal (
 	wire extReset;
 	wire stressLaag;
 	wire stressContinu;
+	wire stressError;
 	
 	
 	// Reset en Delay modules
 	
-	bufferReset	  buffer (clk		, reset,	error, intReset,	extReset);
-	holdReset     starter(clk   	, extReset, stressContinu,      intReset);
+	holdReset     starter(clk   	, (extReset|stressError), stressContinu,      intReset);
 	clkDelay	  delay	 (clk		, extReset, slow4,				slow12  );
 	
 	// Input modules
 
-	stress	  Ingang (clk, extReset, slow4, slow12, DSPingang, DSPready, hartslagIngang, stressLaag, stressContinu); 
+	stress	  Ingang (clk, extReset, slow4, slow12, DSPingang, DSPready, hartslagIngang, stressLaag, stressContinu, stressError); 
 	
 	// Controler
 	
