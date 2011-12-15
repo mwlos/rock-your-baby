@@ -128,3 +128,23 @@ module delay_4_2( // 4 wide 1 tick delay
 	 assign q = data[11:8];
 	 
 endmodule
+
+module delay_8_2( // 8 wide 2 tick delay
+    input clk,
+    input reset,
+    input [7:0] signal,
+    output [7:0] q
+    );
+	 
+	 reg [23:0] data;
+	 
+	 always @ (posedge clk or posedge reset) begin
+		if (reset)
+			data = 0;
+		else
+			data = {data[15:0],signal};
+	 end
+	 
+	 assign q = data[23:16];
+	 
+endmodule
