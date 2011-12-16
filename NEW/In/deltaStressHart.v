@@ -2,7 +2,7 @@ module deltaStressHart(
 		input slow,
 		input reset,
 		input [5:0] hart,
-		output gedaald
+		output gelijk
 		);
 		
 	wire [5:0] delayOne;
@@ -13,7 +13,7 @@ module deltaStressHart(
 	delay_6 delayModuleTwo 		(slow, reset, delayOne, delayTwo);
 	delay_6 delayModuleThree 	(slow, reset, delayTwo, delayThree);
 	
-	assign gedaald = ( (hart == delayOne) & (delayOne == delayTwo) & (delayTwo == delayThree) );
+	assign gelijk = ( (hart == delayOne) & (delayOne == delayTwo) & (delayTwo == delayThree) );
 	
 	
 endmodule
