@@ -129,6 +129,26 @@ module delay_4_2( // 4 wide 1 tick delay
 	 
 endmodule
 
+module delay_6(
+    input clk,
+    input reset,
+    input [5:0] signal,
+    output [5:0] q
+    );
+	 
+	 reg [11:0] data;
+	 
+	 always @ (posedge clk or posedge reset) begin
+		if (reset)
+			data = 0;
+		else
+			data = {data[5:0],signal};
+	 end
+	 
+	 assign q = data[11:6];
+	 
+endmodule
+
 module delay_8_2( // 8 wide 2 tick delay
     input clk,
     input reset,
