@@ -1,26 +1,19 @@
 module deltaStressHart(
-		input clk4,
-		input clk12,
+		input slow,
 		input reset,
-		input [7:0] hart,
-		output gedaald,
-		output err,
-		output errRelease
+		input [5:0] hart,
+		output gedaald
 		);
 		
-	wire [7:0] delayed;
-	wire equal;
-	wire equalDelay;
+	wire [5:0] delayOne;
+	wire [5:0] delayTwo;
+	wire [5:0] delayThree;
 	
-	delay_8_2 HartDelay (clk4, reset, hart, delayed);
+	delay_6 delayModuleOne 		(slow, reset, hart, 	delayOne);
+	delay_6 delayModuleTwo 		(slow, reset, delayOne, delayTwo);
+	delay_6 delayModuleThree 	(slow, reset, delayTwo, delayThree);
 	
-	assign gedaald = (hart < delayed);
-	assign equal = (hart == delayed);
-	assign err = ~(hart | delayed);
-	
-	delay_1 ErrDelay (clk12, reset, equal, equalDelay);
-	
-	assign errRelease = (equal == equalDelay);
+	assign gedaald = ( (hart == delayOne) & (delayOne == delayTwo) & (delayTwo == delayThree) );
 	
 	
 endmodule
