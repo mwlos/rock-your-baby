@@ -11,28 +11,26 @@ module totaal (
 	wire [2:0] amp;
 	wire [2:0] freq;
 	
-	wire slow4;
-	wire slow12;
+	wire slow;
 	wire error;
 	wire intReset;
 	wire extReset;
 	wire stressLaag;
 	wire stressContinu;
-	wire stressError;
 	
 	
 	// Reset en Delay modules
 	
-	holdReset     starter(clk   	, (extReset|stressError), stressContinu,      intReset);
-	clkDelay	  delay	 (clk		, extReset, slow4,				slow12  );
+	clkDelay	  delay	 (clk, extReset, slow);
+	makeOneTick   oneTick (clk, extReset, stressContinu, stressContinuOneTick); // To make signal stressContinu only 1 tick long (not tested)
 	
 	// Input modules
 
-	stress	  Ingang (clk, extReset, slow4, slow12, DSPingang, DSPready, hartslagIngang, stressLaag, stressContinu, stressError); 
+	stress	  Ingang (clk, extReset, slow, DSPingang, DSPready, hartslagIngang, stressLaag, stressContinu); 
 	
 	// Controler
 	
-	FPGAControler crtl 	 (slow4, intReset, stressLaag, amp, freq, error);
+	FPGAControler crtl 	 (stressContinuOneTick , extReset, stressLaag, amp, freq, error);
 	
 	// Output module
 	

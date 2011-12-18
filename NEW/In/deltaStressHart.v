@@ -27,5 +27,4 @@ module deltaStressHart(
 	
 	assign gedaald = ( hart > memory );
 	
-	
 endmodule
