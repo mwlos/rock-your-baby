@@ -14,9 +14,9 @@ module signaalGenerator(
 		if(resetmore)
 			C = 0;
 		else
-			C = C + 1'b1;
+			C = C + 1;
 	end
 	
-	assign Uitvoer = (C <= Invoer);
+	assign Uitvoer = ( (C <= Invoer) & ~Reset );
 	
 endmodule

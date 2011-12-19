@@ -3,7 +3,8 @@ module deltaStressHart(
 		input reset,
 		input [5:0] hart,
 		output gelijk,
-		output gedaald
+		output gedaald,
+		output error
 		);
 		
 	wire [5:0] delayOne;
@@ -25,6 +26,7 @@ module deltaStressHart(
 			memory = hart;
 	end
 	
-	assign gedaald = ( hart > memory );
+	assign gedaald  = ( hart > memory );
+	assign error	= ( hart < memory );
 	
 endmodule
