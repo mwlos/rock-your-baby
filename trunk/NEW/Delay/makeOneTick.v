@@ -1,5 +1,5 @@
 module makeOneTick(
-	input clk
+	input clk,
 	input reset,
 	input data,
 	output q
