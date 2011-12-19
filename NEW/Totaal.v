@@ -14,7 +14,6 @@ module totaal (
 	wire slow;
 	wire error;
 	wire intReset;
-	wire extReset;
 	wire stressLaag;
 	wire stressContinu;
 	

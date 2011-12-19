@@ -19,7 +19,7 @@ module stress(
 	hartRitme  hartRit (clk,reset,hart,slow,hartData);
 	//huilVolume huilVol (clk,clk4,reset,huil,DSPctrl,huilData);
 	
-	deltaStressHart hart (slow,reset,hartData,hartGelijk,hartLaag);
+	deltaStressHart stressHart (slow,reset,hartData,hartGelijk,hartLaag);
 	//deltaStressHuil huil (reset,clk4,clk12,huilData,huilLaag[7:4],huilGelijk);
 	
 	//assign gedaald = (hartLaag|huilLaag);
