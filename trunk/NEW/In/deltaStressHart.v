@@ -3,7 +3,7 @@ module deltaStressHart(
 		input reset,
 		input [5:0] hart,
 		output gelijkPuls,
-		output gedaald,
+		output reg gedaald,
 		output error
 		);
 		
@@ -21,7 +21,8 @@ module deltaStressHart(
 	delay_6 delayModuleTwo 		(slow, reset, delayOne, delayTwo	);
 	delay_6 delayModuleThree 	(slow, reset, delayTwo, delayThree	);
 	
-	assign resetSlower = reset | (slower == 6);
+	assign resetSlower = reset | gelijkPuls;
+	assign resetOnSlower = reset | (slower == 3'b111);
 	assign gelijk = ( (hart == delayOne) & (delayOne == delayTwo) & (delayTwo == delayThree) );
 	assign gelijkPuls = gelijk & gelijkHold;
 	
@@ -32,21 +33,27 @@ module deltaStressHart(
 			slower = slower + 1;
 	end
 	
-	always @ (negedge clk or posedge resetSlower) begin
-			if (resetSlower)
-				gelijkHold = 0;
+	always @ (negedge slow or posedge resetOnSlower) begin
+			if (resetOnSlower)
+				gelijkHold = 1;
 			else
 				gelijkHold = ~gelijk;
 	end
 	
-	always @ (posedge gelijkPuls or posedge reset) begin
+	always @ (negedge gelijkPuls or posedge reset) begin
 		if (reset)
-			memory = 63;
+			memory = 0;
 		else
 			memory = hart;
 	end
 	
-	assign gedaald = ( hart > memory );
+	always @ (posedge gelijkPuls or posedge reset) begin
+		if (reset)
+			gedaald = 0;
+		else
+			gedaald = ( hart > memory );
+	end
+	
 	assign error	= ( hart < memory );
 	
 endmodule
