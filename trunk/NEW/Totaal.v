@@ -10,8 +10,9 @@ module totaal (
 	output showCont,
 	output showLaag,
 	output showErr,
-	output error,
-	output stressLaag);
+	output error1,
+	output stressLaag,
+	output [7:0] hartData);
 	
 	wire [2:0] amp;
 	wire [2:0] freq;
@@ -35,7 +36,7 @@ module totaal (
 	
 	// Input modules
 
-	stress	  Ingang (clk, extReset, slow, DSPingang, DSPready, hartslagIngang, stressLaag, stressContinu); 
+	stress	  Ingang (clk, extReset, slow, DSPingang, DSPready, hartslagIngang, stressLaag, stressContinu, error1, hartData); 
 	
 	// Controler
 	
