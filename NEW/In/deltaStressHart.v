@@ -13,7 +13,7 @@ module deltaStressHart(
 	wire gelijk;
 	wire resetSlower;
 	
-	reg  [5:0] memory;
+	reg [5:0] memory;
 	reg gelijkHold;
 	reg [3:0] slower;
 	
@@ -22,7 +22,7 @@ module deltaStressHart(
 	delay_6 delayModuleThree 	(slow, reset, delayTwo, delayThree	);
 	
 	assign resetSlower = reset | gelijkPuls;
-	assign resetOnSlower = reset | (slower == 3'b111);
+	assign resetOnSlower = reset | (slower == 7);
 	assign gelijk = ( (hart == delayOne) & (delayOne == delayTwo) & (delayTwo == delayThree) );
 	assign gelijkPuls = gelijk & gelijkHold;
 	
