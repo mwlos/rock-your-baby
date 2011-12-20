@@ -41,7 +41,7 @@ module FAG(
 	end
 	
 	// DFF to remember F
-	always @ (negedge clk or posedge reset) begin	// hier stond eerst FclkDff ipv clk
+	always @ (posedge clk or posedge reset) begin	// hier stond eerst FclkDff ipv clk
 		if (reset)
 			F = 4;				
 		else if (FclkDff)                // lost een warning op door gebruik te maken van de CE (clock enable) van de FF
@@ -49,7 +49,7 @@ module FAG(
 	end
 	
 	// Counter for A
-	always @ (negedge clk or posedge reset) begin	// hier stond eerst Alaag ipv clk
+	always @ (posedge clk or posedge reset) begin	// hier stond eerst Alaag ipv clk
 		if (reset)
 			A = 4;				
 		else if (Al)		   // lost een warning op door gebruik te maken van de CE (clock enable) van de FF
