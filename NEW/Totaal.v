@@ -1,21 +1,31 @@
 module totaal (
 	input clk,
-	input reset,
 	input [7:0] DSPingang,
 	input hartslagIngang,
 	input DSPready,
 	input extReset,
 	output PSfreq,
-	output PSamp);
+	output PSamp,
+	output showClk,
+	output showCont,
+	output showLaag,
+	output showErr,
+	output error,
+	output stressLaag);
 	
 	wire [2:0] amp;
 	wire [2:0] freq;
 	
 	wire slow;
-	wire error;
+//	wire error;
 	wire intReset;
-	wire stressLaag;
+//	wire stressLaag;
 	wire stressContinu;
+	
+	
+	// Controle signalen
+	TFF tff1 (slow, extReset, showClk);
+	TFF tff2 (stressContinu, extReset, showCont);
 	
 	
 	// Reset en Delay modules
