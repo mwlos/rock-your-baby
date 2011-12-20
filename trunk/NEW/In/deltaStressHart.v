@@ -4,7 +4,7 @@ module deltaStressHart(
 		input [5:0] hart,
 		output gelijkPuls,
 		output reg gedaald,
-		output error
+		output reg error
 		);
 		
 	wire [5:0] delayOne;
@@ -54,6 +54,11 @@ module deltaStressHart(
 			gedaald = ( hart > memory );
 	end
 	
-	assign error	= ( hart < memory );
+	always @ (posedge gelijkPuls or posedge reset) begin
+		if (reset)
+			error = 0;
+		else
+			error = ( hart < memory );
+	end
 	
 endmodule
