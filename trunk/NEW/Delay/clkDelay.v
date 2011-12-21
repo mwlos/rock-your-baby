@@ -7,7 +7,7 @@ module clkDelay (
 		
 	wire resetmore;
 		
-	assign resetmore = Reset | ( C >= 48000000 );
+	assign resetmore = Reset | ( C >= 48000010 );
 	
 	always @ (posedge CLK or posedge resetmore) begin
 		if(resetmore)
@@ -16,7 +16,7 @@ module clkDelay (
 			C = C + 1;
 	end
 	
-	assign Slow = (C == 0);
+	assign Slow = (C == 48000009);
 	
 		
 endmodule
