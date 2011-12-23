@@ -31,7 +31,7 @@ module deltaStressHart(
 	assign resetOnSlower = reset | (slower == 7);
 	assign gelijk = ( (hart == delayOne) & (delayOne == delayTwo) & (delayTwo == delayThree) );
 	assign gelijkPuls = gelijk & gelijkHold;
-	assign resetHart = een | vijf;
+	assign resetHart = een | vijf | drie;
 	
 	
 	always @ (posedge slow or posedge resetSlower) begin
